@@ -42,7 +42,7 @@ async function getVideo(id) {
             image.src = element.thumbnail[2].url;
 
             for (let i = 0; i < mp4.length; i++) {
-                if (!element.formats[i]) continue;
+                if (!element.formats[i]) break;
                 if (!element.formats[i].mimeType.includes('video/mp4')) {
                     mp4[i].style.display = 'none';
                     continue;
@@ -57,6 +57,7 @@ async function getVideo(id) {
             if (audioFormats) {
                 formatTitle[1].innerText = "AUDIO";
                 for (let i = 0; i < mp3.length; i++) {
+		    if (!audioFormats[i]) break;
                     mp3[i].innerText = audioFormats[i].mimeType.substring(audioFormats[i].mimeType.indexOf('/') + 1, audioFormats[i].mimeType.indexOf(';'));
                     mp3[i].href = audioFormats[i].url;
                     mp3[i].classList.add('active');
